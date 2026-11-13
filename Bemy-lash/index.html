@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Glam Nails Studio | Manicure, pedicure y nail art</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;color-scheme:light}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:#fff4f1;color:#2b1030;line-height:1.6;overflow-x:hidden}
+h1,h2,h3,.logo{font-family:Georgia,'Times New Roman',serif}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,#ff4f8b,#e5b567);z-index:200}
+header{position:fixed;inset:0 0 auto 0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:20px 6%;transition:padding .3s,background .3s,box-shadow .3s}
+header.small{padding:10px 6%;background:rgba(255,244,241,.96);box-shadow:0 4px 20px rgba(43,16,48,.12)}
+.logo{font-size:1.6rem;font-weight:bold;color:#ff4f8b;text-decoration:none}
+nav a{margin-left:22px;color:#2b1030;text-decoration:none;font-weight:600}
+nav a:hover{color:#ff4f8b}
+#menu{display:none;background:none;border:0;font-size:1.8rem;cursor:pointer;color:#2b1030}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #2b1030;outline-offset:2px}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 6% 60px;position:relative;overflow:hidden;background:radial-gradient(circle at 15% 20%,#ffd3e2,transparent 50%),radial-gradient(circle at 85% 75%,#e4d8ff,transparent 50%),#fff4f1}
+.hero .in{position:relative;z-index:2;max-width:780px}
+.hero h1{font-size:clamp(2.5rem,6.5vw,4.8rem);line-height:1.08;letter-spacing:-.02em}
+.type{font-size:1.35rem;min-height:2.2rem;margin:20px 0 30px;color:#6b3a66}
+.caret{display:inline-block;width:2px;height:1.2em;background:#ff4f8b;margin-left:3px;vertical-align:middle;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.btn{display:inline-block;padding:14px 30px;border:0;border-radius:40px;background:#ff4f8b;color:#fff;font-weight:700;font-size:1rem;cursor:pointer;text-decoration:none;box-shadow:0 8px 20px rgba(255,79,139,.35);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px);box-shadow:0 12px 26px rgba(255,79,139,.45)}
+.btn.ghost{background:transparent;color:#2b1030;border:2px solid #2b1030;box-shadow:none;margin-left:10px}
+.spark{position:absolute;pointer-events:none;z-index:1}
+.stats{display:flex;flex-wrap:wrap;gap:24px;justify-content:center;background:#2b1030;color:#fff4f1;padding:50px 6%}
+.stat{text-align:center;min-width:150px}
+.stat b{display:block;font-size:2.8rem;font-family:Georgia,serif;color:#ffc2d8}
+section{padding:90px 6%}
+.title{font-size:2.4rem;text-align:center;margin-bottom:10px}
+.sub{text-align:center;color:#6b3a66;margin:0 auto 44px;max-width:560px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;max-width:1100px;margin:auto}
+.card{background:#fff;border-radius:22px;padding:30px;box-shadow:0 8px 24px rgba(43,16,48,.08);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 16px 34px rgba(255,79,139,.2)}
+.card .ic{font-size:2.3rem}
+.card h3{margin:8px 0 6px}
+.price{display:block;margin-top:12px;font-weight:800;color:#d92a6b}
+.js .rv{opacity:0}
+.js .rv.shown{opacity:1}
+.filters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:30px}
+.fbtn{padding:10px 22px;border-radius:30px;border:2px solid #ff4f8b;background:#fff;color:#d92a6b;font-weight:700;cursor:pointer;font-size:1rem}
+.fbtn.on{background:#ff4f8b;color:#fff}
+.gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:22px;max-width:1100px;margin:auto}
+.tile{background:#fff;border-radius:18px;padding:24px 10px 16px;text-align:center;box-shadow:0 6px 18px rgba(43,16,48,.08);cursor:pointer;transition:box-shadow .3s}
+.tile:hover{box-shadow:0 14px 28px rgba(255,79,139,.25)}
+.tile small{color:#8a5a84}
+.nail{position:relative;width:70px;height:100px;margin:0 auto 12px;border-radius:50% 50% 14px 14px/38% 38% 14px 14px;box-shadow:inset -6px -8px 14px rgba(0,0,0,.12),0 8px 14px rgba(0,0,0,.12);transition:transform .35s}
+.nail::after{content:"";position:absolute;top:10%;left:18%;width:18%;height:38%;border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(8deg)}
+.tile:hover .nail{transform:rotate(-8deg) scale(1.08)}
+.lab{max-width:900px;margin:auto;background:#fff;border-radius:28px;padding:40px 20px;box-shadow:0 10px 30px rgba(43,16,48,.1);text-align:center}
+.hand{display:flex;justify-content:center;align-items:flex-end;gap:10px;height:150px;margin:10px 0 30px}
+.hand .nail{margin:0;width:50px;background-color:#ff8fc0}
+.hand .nail:nth-child(1){height:72px}.hand .nail:nth-child(2){height:98px}.hand .nail:nth-child(3){height:112px}.hand .nail:nth-child(4){height:100px}.hand .nail:nth-child(5){height:84px}
+#cname{font-weight:700;margin-bottom:16px;min-height:1.6em}
+.swatches{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.sw{width:44px;height:44px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 2px #e6cfdc;cursor:pointer;transition:transform .2s,box-shadow .2s}
+.sw:hover{transform:scale(1.2)}
+.sw.on{box-shadow:0 0 0 3px #2b1030}
+.car{max-width:720px;margin:auto;text-align:center}
+.slide{display:none;background:#fff;border-radius:24px;padding:36px 30px;box-shadow:0 10px 30px rgba(43,16,48,.1);min-height:230px}
+.slide.on{display:block}
+.slide p{font-size:1.15rem;font-style:italic}
+.slide b{display:block;margin-top:14px;color:#d92a6b}
+.stars{color:#e5b567;font-size:1.3rem;letter-spacing:3px}
+.ctrl{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:20px}
+.arrow{width:42px;height:42px;border-radius:50%;border:0;background:#ff4f8b;color:#fff;font-size:1.2rem;cursor:pointer}
+.dot{width:12px;height:12px;border-radius:8px;background:#e6cfdc;cursor:pointer;border:0;transition:all .3s}
+.dot.on{background:#ff4f8b;width:30px}
+form{max-width:620px;margin:auto;background:#fff;padding:36px;border-radius:26px;box-shadow:0 10px 30px rgba(43,16,48,.1)}
+.fg{margin-bottom:16px}
+label{display:block;font-weight:700;margin-bottom:6px}
+input,select{width:100%;padding:13px 14px;border:2px solid #efd6e3;border-radius:12px;font-size:1rem;font-family:inherit;background:#fff;color:#2b1030}
+input:focus,select:focus{border-color:#ff4f8b}
+.err{color:#b3123f;font-size:.88rem;min-height:1.2em;margin-top:4px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+#ok{display:none;text-align:center;color:#1d6b2f;font-weight:700;margin-top:18px;font-size:1.1rem}
+footer{background:#2b1030;color:#ffc2d8;text-align:center;padding:36px 6%}
+#conf{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:300}
+@media(max-width:760px){#menu{display:block}nav{position:absolute;top:100%;left:0;right:0;background:#fff4f1;display:none;flex-direction:column;padding:10px 6% 20px}nav.open{display:flex}nav a{margin:10px 0}.row{grid-template-columns:1fr}.btn.ghost{margin:12px 0 0}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.caret{animation:none}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<header>
+  <a class="logo" href="#inicio">Glam Nails</a>
+  <button id="menu" aria-label="Abrir menú">☰</button>
+  <nav>
+    <a href="#servicios">Servicios</a><a href="#galeria">Galería</a><a href="#probador">Probador</a><a href="#opiniones">Opiniones</a><a href="#reserva">Reservar</a>
+  </nav>
+</header>
+
+<main>
+<div class="hero" id="inicio">
+  <div class="in">
+    <h1>Uñas que hablan de ti</h1>
+    <p class="type"><span id="typed"></span><span class="caret"></span></p>
+    <a class="btn" href="#reserva">Reservar mi cita</a><a class="btn ghost" href="#probador">Probar colores</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat"><b data-t="1200" data-s="+">0</b>clientas felices</div>
+  <div class="stat"><b data-t="85" data-s="+">0</b>diseños creados</div>
+  <div class="stat"><b data-t="6">0</b>años de experiencia</div>
+  <div class="stat"><b data-t="98" data-s="%">0</b>de satisfacción</div>
+</div>
+
+<section id="servicios">
+  <h2 class="title rv">Nuestros servicios</h2>
+  <p class="sub rv">Cuidamos tus manos y pies con productos de calidad y mucho detalle.</p>
+  <div class="grid">
+    <div class="card rv"><div class="ic">💅</div><h3>Manicure clásica</h3><p>Limpieza, forma, cutícula y esmaltado tradicional.</p><span class="price">S/ 25</span></div>
+    <div class="card rv"><div class="ic">✨</div><h3>Esmaltado en gel</h3><p>Brillo intenso y duración de hasta tres semanas.</p><span class="price">S/ 45</span></div>
+    <div class="card rv"><div class="ic">💎</div><h3>Uñas acrílicas</h3><p>Extensión y estructura con el largo que prefieras.</p><span class="price">S/ 80</span></div>
+    <div class="card rv"><div class="ic">🎨</div><h3>Nail art</h3><p>Diseños a mano alzada, brillos y decoraciones. Precio por diseño.</p><span class="price">Desde S/ 20</span></div>
+    <div class="card rv"><div class="ic">🌸</div><h3>Pedicure spa</h3><p>Exfoliación, masaje relajante e hidratación profunda.</p><span class="price">S/ 50</span></div>
+    <div class="card rv"><div class="ic">🧴</div><h3>Retiro y cuidado</h3><p>Retiro seguro de gel o acrílico y tratamiento fortalecedor.</p><span class="price">S/ 15</span></div>
+  </div>
+</section>
+
+<section id="galeria" style="background:#fff">
+  <h2 class="title rv">Galería de diseños</h2>
+  <p class="sub rv">Filtra por estilo y encuentra la inspiración para tu próxima cita.</p>
+  <div class="filters" id="filters">
+    <button class="fbtn on" data-c="todos">Todos</button><button class="fbtn" data-c="clasico">Clásicos</button><button class="fbtn" data-c="frances">Franceses</button><button class="fbtn" data-c="arte">Nail art</button>
+  </div>
+  <div class="gal" id="gal"></div>
+</section>
+
+<section id="probador">
+  <h2 class="title rv">Probador de colores</h2>
+  <p class="sub rv">Elige un tono y mira cómo quedan tus uñas antes de reservar.</p>
+  <div class="lab rv">
+    <div class="hand" id="hand"></div>
+    <p id="cname"></p>
+    <div class="swatches" id="sws"></div>
+    <button class="btn" id="rand">Sorpréndeme</button>
+  </div>
+</section>
+
+<section id="opiniones" style="background:#fff">
+  <h2 class="title rv">Lo que dicen nuestras clientas</h2>
+  <p class="sub rv">Opiniones de quienes ya pasaron por el estudio.</p>
+  <div class="car rv">
+    <div class="slide"><div class="stars">★★★★★</div><p>Me hicieron un diseño francés dorado que duró tres semanas intacto. Salí feliz con el resultado.</p><b>Camila R.</b></div>
+    <div class="slide"><div class="stars">★★★★★</div><p>Muy buena atención y todo súper limpio. El pedicure spa fue lo más relajante de mi semana.</p><b>Valeria M.</b></div>
+    <div class="slide"><div class="stars">★★★★★</div><p>Llevé una foto de referencia y la copiaron perfecto. Ya tengo mi próxima cita reservada.</p><b>Daniela P.</b></div>
+    <div class="ctrl"><button class="arrow" id="prev" aria-label="Anterior">‹</button><div id="dots" style="display:flex;gap:8px"></div><button class="arrow" id="next" aria-label="Siguiente">›</button></div>
+  </div>
+</section>
+
+<section id="reserva">
+  <h2 class="title rv">Reserva tu cita</h2>
+  <p class="sub rv">Completa el formulario y te confirmamos por WhatsApp.</p>
+  <form id="f" class="rv" novalidate>
+    <div class="fg"><label for="nombre">Nombre completo</label><input id="nombre" type="text" autocomplete="name"><div class="err"></div></div>
+    <div class="fg"><label for="tel">Celular</label><input id="tel" type="tel" inputmode="numeric" placeholder="9 dígitos" autocomplete="tel"><div class="err"></div></div>
+    <div class="fg"><label for="serv">Servicio</label>
+      <select id="serv"><option value="">Elige un servicio</option><option>Manicure clásica</option><option>Esmaltado en gel</option><option>Uñas acrílicas</option><option>Nail art</option><option>Pedicure spa</option><option>Retiro y cuidado</option></select><div class="err"></div></div>
+    <div class="row">
+      <div class="fg"><label for="fecha">Fecha</label><input id="fecha" type="date"><div class="err"></div></div>
+      <div class="fg"><label for="hora">Hora</label><input id="hora" type="time" min="09:00" max="19:00"><div class="err"></div></div>
+    </div>
+    <button class="btn" type="submit" style="width:100%">Reservar cita</button>
+    <p id="ok" role="status"></p>
+  </form>
+</section>
+</main>
+
+<footer><p>© <span id="y"></span> Glam Nails Studio. Atendemos con cita previa de lunes a sábado.</p></footer>
+<canvas id="conf"></canvas>
+
+<script>
+/* Animaciones con JavaScript:
+ 1 Barra de progreso al hacer scroll      2 Encabezado que se reduce al bajar
+ 3 Texto con efecto máquina de escribir   4 Destellos flotantes en la portada
+ 5 Contadores animados                    6 Aparición de elementos al hacer scroll
+ 7 Filtro animado de la galería           8 Probador de colores con rebote
+ 9 Carrusel automático de opiniones      10 Formulario con sacudida y confeti */
+(function(){
+document.documentElement.classList.add('js');
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+
+/* 1 y 2: scroll */
+var bar=$('#bar'),head=$('header');
+function onScroll(){
+  var h=document.documentElement.scrollHeight-window.innerHeight;
+  bar.style.width=(h>0?window.scrollY/h*100:0)+'%';
+  head.classList.toggle('small',window.scrollY>40);
+}
+window.addEventListener('scroll',onScroll);onScroll();
+$('#menu').addEventListener('click',function(){$('nav').classList.toggle('open')});
+$$('nav a').forEach(function(a){a.addEventListener('click',function(){$('nav').classList.remove('open')})});
+$('#y').textContent=new Date().getFullYear();
+
+/* 3: máquina de escribir */
+var phrases=['Manicure y pedicure con estilo.','Esmaltado en gel que dura semanas.','Diseños únicos hechos a mano.','Un momento de belleza y relajación.'];
+var pi=0,ci=0,del=false,typed=$('#typed');
+function type(){
+  var p=phrases[pi];ci+=del?-1:1;typed.textContent=p.slice(0,ci);
+  var t=del?35:85;
+  if(!del&&ci===p.length){del=true;t=1600}
+  else if(del&&ci===0){del=false;pi=(pi+1)%phrases.length;t=400}
+  setTimeout(type,t);
+}
+type();
+
+/* 4: destellos */
+var hero=$('.hero'),icons=['✨','💖','💅','⭐','🌸'];
+function spark(){
+  if(reduce||document.hidden)return;
+  var s=document.createElement('span');
+  s.className='spark';
+  s.textContent=icons[Math.floor(Math.random()*icons.length)];
+  s.style.left=(Math.random()*95)+'%';
+  s.style.top=(60+Math.random()*40)+'%';
+  s.style.fontSize=(14+Math.random()*18)+'px';
+  hero.appendChild(s);
+  var up=200+Math.random()*250;
+  var a=s.animate([
+    {transform:'translateY(0) rotate(0deg)',opacity:0},
+    {opacity:1,offset:.2},
+    {transform:'translateY(-'+up+'px) rotate('+Math.round(Math.random()*360)+'deg)',opacity:0}
+  ],{duration:3500+Math.random()*2500,easing:'ease-out'});
+  a.onfinish=function(){s.remove()};
+}
+setInterval(spark,380);
+
+/* 5: contadores */
+function count(el){
+  var t=+el.getAttribute('data-t'),suf=el.getAttribute('data-s')||'',st=null;
+  function f(ts){
+    if(st===null)st=ts;
+    var p=Math.min((ts-st)/1800,1);
+    el.textContent=Math.round(t*(1-Math.pow(1-p,3)))+suf;
+    if(p<1)requestAnimationFrame(f);
+  }
+  requestAnimationFrame(f);
+}
+var co=new IntersectionObserver(function(es){
+  es.forEach(function(e){if(e.isIntersecting){co.unobserve(e.target);count(e.target)}});
+},{threshold:.5});
+$$('.stat b').forEach(function(b){co.observe(b)});
+
+/* 6: aparición al hacer scroll */
+var io=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if(!e.isIntersecting)return;
+    var el=e.target;io.unobserve(el);
+    var idx=Array.prototype.indexOf.call(el.parentNode.children,el);
+    var a=el.animate([{opacity:0,transform:'translateY(40px)'},{opacity:1,transform:'translateY(0)'}],
+      {duration:700,delay:Math.min(idx,4)*110,easing:'ease-out',fill:'both'});
+    a.onfinish=function(){el.classList.add('shown');a.cancel()};
+  });
+},{threshold:.15});
+$$('.rv').forEach(function(el){io.observe(el)});
+
+/* 7: galería con filtro */
+var designs=[
+ {n:'Rosa clásico',c:'clasico',b:'linear-gradient(145deg,#ffb3d1,#ff7eb3)'},
+ {n:'Rojo cereza',c:'clasico',b:'linear-gradient(145deg,#ff5a6e,#c2102f)'},
+ {n:'Nude elegante',c:'clasico',b:'linear-gradient(145deg,#f3d5c4,#dcae96)'},
+ {n:'Francés blanco',c:'frances',b:'linear-gradient(to bottom,#ffffff 0%,#ffffff 30%,#f7c9d6 30%,#f7c9d6 100%)'},
+ {n:'Francés dorado',c:'frances',b:'linear-gradient(to bottom,#e6b94f 0%,#e6b94f 25%,#f9dfe6 25%,#f9dfe6 100%)'},
+ {n:'Francés negro',c:'frances',b:'linear-gradient(to bottom,#222222 0%,#222222 28%,#f4d3dc 28%,#f4d3dc 100%)'},
+ {n:'Galaxia',c:'arte',b:'radial-gradient(circle at 30% 30%,#a066ff,#2a1060 70%)'},
+ {n:'Sandía',c:'arte',b:'linear-gradient(to bottom,#2e9e4f 0%,#2e9e4f 18%,#ffffff 18%,#ffffff 26%,#ff4f6a 26%,#ff4f6a 100%)'},
+ {n:'Atardecer',c:'arte',b:'linear-gradient(160deg,#ffd36e,#ff7a59,#b23a8a)'}
+];
+var labels={clasico:'Clásico',frances:'Francés',arte:'Nail art'};
+var gal=$('#gal');
+designs.forEach(function(d){
+  var t=document.createElement('div');
+  t.className='tile';t.setAttribute('data-c',d.c);
+  var n=document.createElement('div');n.className='nail';n.style.background=d.b;
+  var h=document.createElement('strong');h.textContent=d.n;
+  var s=document.createElement('small');s.textContent=labels[d.c];
+  t.appendChild(n);t.appendChild(h);t.appendChild(document.createElement('br'));t.appendChild(s);
+  t.addEventListener('click',function(){
+    n.animate([{transform:'rotate(0)'},{transform:'rotate(-14deg)'},{transform:'rotate(12deg)'},{transform:'rotate(-8deg)'},{transform:'rotate(0)'}],{duration:600});
+  });
+  gal.appendChild(t);
+});
+$('#filters').addEventListener('click',function(e){
+  var b=e.target.closest('.fbtn');if(!b)return;
+  $$('.fbtn').forEach(function(x){x.classList.toggle('on',x===b)});
+  var cat=b.getAttribute('data-c'),k=0;
+  $$('.tile').forEach(function(t){
+    var show=cat==='todos'||t.getAttribute('data-c')===cat;
+    if(show){
+      t.style.display='';
+      t.animate([{opacity:0,transform:'scale(.6)'},{opacity:1,transform:'scale(1)'}],{duration:450,delay:k*60,easing:'ease-out',fill:'backwards'});
+      k++;
+    }else{t.style.display='none'}
+  });
+});
+
+/* 8: probador de colores */
+var cols=[['Rosa chicle','#ff8fc0'],['Rojo cereza','#d7263d'],['Lila suave','#b48cf2'],['Turquesa','#2ec4b6'],['Dorado','#e0b04a'],['Negro brillante','#222222'],['Blanco perla','#f6f1ee'],['Coral','#ff7a59']];
+var hand=$('#hand'),sws=$('#sws'),nails=[],swEls=[];
+for(var i=0;i<5;i++){var nl=document.createElement('div');nl.className='nail';hand.appendChild(nl);nails.push(nl)}
+cols.forEach(function(c,i){
+  var b=document.createElement('button');
+  b.className='sw';b.style.background=c[1];b.setAttribute('aria-label',c[0]);
+  b.addEventListener('click',function(){paint(i)});
+  sws.appendChild(b);swEls.push(b);
+});
+function paint(i){
+  $('#cname').textContent='Color elegido: '+cols[i][0];
+  swEls.forEach(function(s,j){s.classList.toggle('on',j===i)});
+  nails.forEach(function(n,k){
+    setTimeout(function(){n.style.backgroundColor=cols[i][1]},k*90);
+    n.animate([{transform:'translateY(0) scale(1)'},{transform:'translateY(-18px) scale(1.15)'},{transform:'translateY(0) scale(1)'}],{duration:500,delay:k*90});
+  });
+}
+$('#rand').addEventListener('click',function(){paint(Math.floor(Math.random()*cols.length))});
+paint(0);
+
+/* 9: carrusel */
+var sl=$$('.slide'),dots=$('#dots'),cur=0,timer;
+sl.forEach(function(_,i){
+  var d=document.createElement('button');
+  d.className='dot';d.setAttribute('aria-label','Opinión '+(i+1));
+  d.addEventListener('click',function(){go(i);restart()});
+  dots.appendChild(d);
+});
+function go(n){
+  sl[cur].classList.remove('on');
+  cur=(n+sl.length)%sl.length;
+  var s=sl[cur];s.classList.add('on');
+  s.animate([{opacity:0,transform:'translateX(60px)'},{opacity:1,transform:'translateX(0)'}],{duration:600,easing:'ease-out'});
+  $$('.dot').forEach(function(d,i){d.classList.toggle('on',i===cur)});
+}
+function restart(){clearInterval(timer);timer=setInterval(function(){go(cur+1)},4500)}
+$('#prev').addEventListener('click',function(){go(cur-1);restart()});
+$('#next').addEventListener('click',function(){go(cur+1);restart()});
+go(0);restart();
+
+/* 10: formulario y confeti */
+var f=$('#f'),fecha=$('#fecha');
+var now=new Date();now.setMinutes(now.getMinutes()-now.getTimezoneOffset());
+fecha.min=now.toISOString().slice(0,10);
+function bad(el,msg){
+  $('.err',el.parentNode).textContent=msg;
+  el.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(-6px)'},{transform:'translateX(6px)'},{transform:'translateX(0)'}],{duration:400});
+  return false;
+}
+function confetti(){
+  if(reduce)return;
+  var c=$('#conf'),x=c.getContext('2d');
+  c.width=window.innerWidth;c.height=window.innerHeight;
+  var cl=['#ff4f8b','#ffc2d8','#e5b567','#b48cf2','#2ec4b6'],ps=[],life=0;
+  for(var i=0;i<140;i++)ps.push({x:c.width/2,y:c.height*0.6,vx:(Math.random()-.5)*14,vy:-Math.random()*16-4,s:5+Math.random()*7,c:cl[i%cl.length],r:Math.random()*6});
+  function fr(){
+    x.clearRect(0,0,c.width,c.height);life++;
+    ps.forEach(function(p){
+      p.vy+=.35;p.x+=p.vx;p.y+=p.vy;p.r+=.2;
+      x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/2,p.s,p.s*.6);x.restore();
+    });
+    if(life<150)requestAnimationFrame(fr);else x.clearRect(0,0,c.width,c.height);
+  }
+  fr();
+}
+f.addEventListener('submit',function(e){
+  e.preventDefault();
+  $$('.err',f).forEach(function(x){x.textContent=''});
+  $('#ok').style.display='none';
+  var n=$('#nombre'),t=$('#tel'),s=$('#serv'),h=$('#hora'),ok=true;
+  if(n.value.trim().length<3)ok=bad(n,'Escribe tu nombre completo.');
+  if(!/^\d{9}$/.test(t.value.replace(/\s/g,'')))ok=bad(t,'Ingresa un celular de 9 dígitos.');
+  if(!s.value)ok=bad(s,'Elige un servicio.');
+  if(!fecha.value||fecha.value<fecha.min)ok=bad(fecha,'Elige una fecha de hoy en adelante.');
+  if(!h.value)ok=bad(h,'Elige una hora.');
+  if(!ok)return;
+  var p=fecha.value.split('-');
+  var msg='¡Listo, '+n.value.trim().split(' ')[0]+'! Tu cita de '+s.value+' quedó reservada para el '+p[2]+'/'+p[1]+'/'+p[0]+' a las '+h.value+'.';
+  f.reset();
+  var o=$('#ok');o.textContent=msg;o.style.display='block';
+  o.animate([{opacity:0,transform:'scale(.7)'},{opacity:1,transform:'scale(1.06)'},{opacity:1,transform:'scale(1)'}],{duration:600,easing:'ease-out'});
+  confetti();
+});
+})();
+</script>
+</body>
+</html>
